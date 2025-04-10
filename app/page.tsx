@@ -1,8 +1,22 @@
-
+"use client";
 import { SigninCard } from "@/components/Signincard";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
-
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 export default function Home() {
+  const session = useSession();
+  const router = useRouter();
+  if(session?.data?.user.role === "admin"){
+    router.push("/admin");
+  }
+  else if(session?.data?.user.role === "author"){
+    router.push("/author/allcourses");
+  }
+  else if(session?.data?.user.role === "consumer"){
+    router.push("/consumer");
+  }
+ 
+    
   return (
 <div className="h-full w-full flex md:items-center md:justify-center bg-black/[0.98] antialiased bg-grid-white/[0.05] relative overflow-hidden">
         <div className="p-4 max-w-7xl  mx-auto relative z-10  w-full pt-20 md:pt-0 grid grid-cols-1 md:grid-cols-2">

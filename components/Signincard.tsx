@@ -28,7 +28,7 @@ export const  SigninCard = () => {
           if (session?.user?.role === "admin") {
             router.push("/admin");
         } else if (session?.user?.role === "author") {
-            router.push("/author");
+            router.push("/author/allcourses");
         } else {
             router.push("/consumer");
         }

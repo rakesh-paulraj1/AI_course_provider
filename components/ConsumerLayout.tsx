@@ -10,13 +10,13 @@ interface LayoutProps {
 }
 
 
-export function Layout({ children }: LayoutProps) {
+export function Layoutconsumer({ children }: LayoutProps) {
 const router = useRouter();
   const handlesignout = async () => {
     await signOut({
-      redirect: false, 
+      redirect: false, // We'll handle the redirect manually
     });
-    router.push('/'); 
+    router.push('/'); // Redirect to sign-in page after logout
   };
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -38,12 +38,12 @@ const router = useRouter();
         
         
         <nav className="hidden md:flex items-center gap-4 mx-auto">
-          <Link href="/author/createcourse">
+          {/* <Link href="/createcourse">
             <button className='px-4 py-2 rounded-md border border-black bg-white text-black text-sm hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200'>
-              Create Course
+              Explore Courses
             </button>
-          </Link>
-          <Link href="/author/profile">
+          </Link> */}
+          <Link href="/consumerprofile">
             <button className='px-4 py-2 rounded-md border border-black bg-white text-black text-sm hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200'>
               Profile
             </button>
@@ -60,7 +60,7 @@ const router = useRouter();
     
   </div>
   <div className="block md:hidden flex items-center space-x-2">
-  <button onClick={handlesignout}><LogOut className="h-5 w-5" /></button>
+    <LogOut className="h-5 w-5" />
     <button onClick={toggleMobileMenu} aria-label="Toggle menu">
       {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
     </button>
@@ -72,12 +72,12 @@ const router = useRouter();
 {mobileMenuOpen && (
   <div className="md:hidden border-t border-border">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col space-y-2">
-      <Link href="/author/createcourse">
+      {/* <Link href="/createcourse">
         <button className="px-4 py-2 rounded-md border border-black bg-white text-black text-sm hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200">
           Create Course
         </button>
-      </Link>
-      <Link href="/authorprofile">
+      </Link> */}
+      <Link href="/consumerprofile">
         <button className="px-4 py-2 rounded-md border border-black bg-white text-black text-sm hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200">
           Profile
         </button>
