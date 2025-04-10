@@ -5,7 +5,7 @@ import prisma from "@/utils/Prisma";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { courseId: string } }
+  { params }: { params: { courseid: string } }
 ) {
   try {
     // Verify authentication
@@ -14,10 +14,10 @@ export async function GET(
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { courseId } = params;
+    const { courseid } = params;
 
     // Validate courseId
-    if (!courseId) {
+    if (!courseid) {
       return NextResponse.json(
         { error: "Course ID is required" },
         { status: 400 }
@@ -26,7 +26,7 @@ export async function GET(
 
     // Check if course exists and user has access
     const course = await prisma.course.findUnique({
-      where: { id: courseId },
+      where: { id: courseid },
       include: {
         authors: {
           where: { userId: session.user?.id },
@@ -51,7 +51,7 @@ export async function GET(
 
     // Get all modules for the course
     const modules = await prisma.module.findMany({
-      where: { courseId },
+      where: { courseId: courseid },
       select: {
         id: true,
         title: true,
@@ -72,7 +72,7 @@ export async function GET(
       },
       orderBy: { position: 'asc' }
     });
-
+console.log("Modules:", modules);
     return NextResponse.json({
       success: true,
       data: {
