@@ -11,7 +11,15 @@ export async function GET() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const courses = await prisma.course.findMany();
+    const courses = await prisma.course.findMany({
+      include: {
+        authors: {
+          include: {
+            user: true,
+          },
+        },
+      },
+    });
 
     return NextResponse.json({ courses });
   } catch (error) {

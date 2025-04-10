@@ -2539,7 +2539,6 @@ export namespace Prisma {
     id: string | null
     title: string | null
     description: string | null
-    slug: string | null
     status: $Enums.CourseStatus | null
     coverImageUrl: string | null
     createdAt: Date | null
@@ -2550,7 +2549,6 @@ export namespace Prisma {
     id: string | null
     title: string | null
     description: string | null
-    slug: string | null
     status: $Enums.CourseStatus | null
     coverImageUrl: string | null
     createdAt: Date | null
@@ -2561,7 +2559,6 @@ export namespace Prisma {
     id: number
     title: number
     description: number
-    slug: number
     status: number
     coverImageUrl: number
     createdAt: number
@@ -2574,7 +2571,6 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
-    slug?: true
     status?: true
     coverImageUrl?: true
     createdAt?: true
@@ -2585,7 +2581,6 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
-    slug?: true
     status?: true
     coverImageUrl?: true
     createdAt?: true
@@ -2596,7 +2591,6 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
-    slug?: true
     status?: true
     coverImageUrl?: true
     createdAt?: true
@@ -2680,7 +2674,6 @@ export namespace Prisma {
     id: string
     title: string
     description: string
-    slug: string
     status: $Enums.CourseStatus
     coverImageUrl: string | null
     createdAt: Date
@@ -2708,7 +2701,6 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
-    slug?: boolean
     status?: boolean
     coverImageUrl?: boolean
     createdAt?: boolean
@@ -2722,7 +2714,6 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
-    slug?: boolean
     status?: boolean
     coverImageUrl?: boolean
     createdAt?: boolean
@@ -2733,7 +2724,6 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
-    slug?: boolean
     status?: boolean
     coverImageUrl?: boolean
     createdAt?: boolean
@@ -2744,14 +2734,13 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
-    slug?: boolean
     status?: boolean
     coverImageUrl?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type CourseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "slug" | "status" | "coverImageUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["course"]>
+  export type CourseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "status" | "coverImageUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["course"]>
   export type CourseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     authors?: boolean | Course$authorsArgs<ExtArgs>
     modules?: boolean | Course$modulesArgs<ExtArgs>
@@ -2770,7 +2759,6 @@ export namespace Prisma {
       id: string
       title: string
       description: string
-      slug: string
       status: $Enums.CourseStatus
       coverImageUrl: string | null
       createdAt: Date
@@ -3203,7 +3191,6 @@ export namespace Prisma {
     readonly id: FieldRef<"Course", 'String'>
     readonly title: FieldRef<"Course", 'String'>
     readonly description: FieldRef<"Course", 'String'>
-    readonly slug: FieldRef<"Course", 'String'>
     readonly status: FieldRef<"Course", 'CourseStatus'>
     readonly coverImageUrl: FieldRef<"Course", 'String'>
     readonly createdAt: FieldRef<"Course", 'DateTime'>
@@ -7102,7 +7089,6 @@ export namespace Prisma {
     id: 'id',
     title: 'title',
     description: 'description',
-    slug: 'slug',
     status: 'status',
     coverImageUrl: 'coverImageUrl',
     createdAt: 'createdAt',
@@ -7380,7 +7366,6 @@ export namespace Prisma {
     id?: StringFilter<"Course"> | string
     title?: StringFilter<"Course"> | string
     description?: StringFilter<"Course"> | string
-    slug?: StringFilter<"Course"> | string
     status?: EnumCourseStatusFilter<"Course"> | $Enums.CourseStatus
     coverImageUrl?: StringNullableFilter<"Course"> | string | null
     createdAt?: DateTimeFilter<"Course"> | Date | string
@@ -7393,7 +7378,6 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
-    slug?: SortOrder
     status?: SortOrder
     coverImageUrl?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -7404,7 +7388,6 @@ export namespace Prisma {
 
   export type CourseWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    slug?: string
     AND?: CourseWhereInput | CourseWhereInput[]
     OR?: CourseWhereInput[]
     NOT?: CourseWhereInput | CourseWhereInput[]
@@ -7416,13 +7399,12 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Course"> | Date | string
     authors?: CourseAuthorListRelationFilter
     modules?: ModuleListRelationFilter
-  }, "id" | "slug">
+  }, "id">
 
   export type CourseOrderByWithAggregationInput = {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
-    slug?: SortOrder
     status?: SortOrder
     coverImageUrl?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -7439,7 +7421,6 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Course"> | string
     title?: StringWithAggregatesFilter<"Course"> | string
     description?: StringWithAggregatesFilter<"Course"> | string
-    slug?: StringWithAggregatesFilter<"Course"> | string
     status?: EnumCourseStatusWithAggregatesFilter<"Course"> | $Enums.CourseStatus
     coverImageUrl?: StringNullableWithAggregatesFilter<"Course"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Course"> | Date | string
@@ -7752,7 +7733,6 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
-    slug: string
     status?: $Enums.CourseStatus
     coverImageUrl?: string | null
     createdAt?: Date | string
@@ -7765,7 +7745,6 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
-    slug: string
     status?: $Enums.CourseStatus
     coverImageUrl?: string | null
     createdAt?: Date | string
@@ -7778,7 +7757,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
     status?: EnumCourseStatusFieldUpdateOperationsInput | $Enums.CourseStatus
     coverImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7791,7 +7769,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
     status?: EnumCourseStatusFieldUpdateOperationsInput | $Enums.CourseStatus
     coverImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7804,7 +7781,6 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
-    slug: string
     status?: $Enums.CourseStatus
     coverImageUrl?: string | null
     createdAt?: Date | string
@@ -7815,7 +7791,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
     status?: EnumCourseStatusFieldUpdateOperationsInput | $Enums.CourseStatus
     coverImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7826,7 +7801,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
     status?: EnumCourseStatusFieldUpdateOperationsInput | $Enums.CourseStatus
     coverImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8229,7 +8203,6 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
-    slug?: SortOrder
     status?: SortOrder
     coverImageUrl?: SortOrder
     createdAt?: SortOrder
@@ -8240,7 +8213,6 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
-    slug?: SortOrder
     status?: SortOrder
     coverImageUrl?: SortOrder
     createdAt?: SortOrder
@@ -8251,7 +8223,6 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
-    slug?: SortOrder
     status?: SortOrder
     coverImageUrl?: SortOrder
     createdAt?: SortOrder
@@ -9322,7 +9293,6 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
-    slug: string
     status?: $Enums.CourseStatus
     coverImageUrl?: string | null
     createdAt?: Date | string
@@ -9334,7 +9304,6 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
-    slug: string
     status?: $Enums.CourseStatus
     coverImageUrl?: string | null
     createdAt?: Date | string
@@ -9389,7 +9358,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
     status?: EnumCourseStatusFieldUpdateOperationsInput | $Enums.CourseStatus
     coverImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9401,7 +9369,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
     status?: EnumCourseStatusFieldUpdateOperationsInput | $Enums.CourseStatus
     coverImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9446,7 +9413,6 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
-    slug: string
     status?: $Enums.CourseStatus
     coverImageUrl?: string | null
     createdAt?: Date | string
@@ -9458,7 +9424,6 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
-    slug: string
     status?: $Enums.CourseStatus
     coverImageUrl?: string | null
     createdAt?: Date | string
@@ -9522,7 +9487,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
     status?: EnumCourseStatusFieldUpdateOperationsInput | $Enums.CourseStatus
     coverImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9534,7 +9498,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
     status?: EnumCourseStatusFieldUpdateOperationsInput | $Enums.CourseStatus
     coverImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

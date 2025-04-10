@@ -32,7 +32,6 @@ model Course {
   id            String         @id @default(uuid())
   title         String
   description   String
-  slug          String         @unique
   status        CourseStatus   @default(draft)
   coverImageUrl String?
   createdAt     DateTime       @default(now())

@@ -73,7 +73,7 @@ const CreateCoursePage = () => {
     }
     
     try {
-      const response = await fetch('/api/courses', {
+      const response = await fetch('/api/course/createcourse', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

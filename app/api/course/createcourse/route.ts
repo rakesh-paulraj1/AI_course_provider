@@ -22,73 +22,63 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Create transaction for course and modules
-    const result = await prisma.$transaction(async (tx) => {
-      // 1. Create the course
-      const course = await tx.course.create({
-        data: {
-          title,
-          description,
-          isPublished: false,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        }
-      });
+    // 1. Create the course
+    const course = await prisma.course.create({
+      data: {
+        title,
+        description,
+        status: 'published',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      }
+    });
 
-      // 2. Create course author relationship
-      await tx.courseAuthor.create({
+    // 2. Create course author relationship
+    await prisma.courseAuthor.create({
+      data: {
+        courseId: course.id,
+        userId: session.user.id,
+        role: "primary",
+        joinedAt: new Date(),
+      }
+    });
+
+    // 3. Create modules with empty content
+    const createdModules = [];
+    for (const [index, moduleTitle] of modules.entries()) {
+      await prisma.module.create({
         data: {
           courseId: course.id,
-          userId: session.user.id,
-          role: "primary",
-          joinedAt: new Date(),
-        }
-      });
-
-      // 3. Create modules with empty content
-      const createdModules = await Promise.all(
-        modules.map((moduleTitle: string, index: number) => 
-          tx.module.create({
-            data: {
-              courseId: course.id,
-              title: moduleTitle,
-              description: "",
-              position: index + 1,
-              isLocked: false,
+          title: moduleTitle,
+          description: "",
+          position: index + 1,
+          isLocked: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          contents: {
+            create: {
+              title: "Untitled Content",
+              content: "",
+              contentType: "text",
+              position: 1,
+              creatorId: session.user.id,
+              aiGenerated: false,
               createdAt: new Date(),
               updatedAt: new Date(),
-              contents: {
-                create: {
-                  title: "Untitled Content",
-                  content: "",
-                  contentType: "text",
-                  position: 1,
-                  creatorId: session.user.id,
-                  aiGenerated: false,
-                  createdAt: new Date(),
-                  updatedAt: new Date(),
-                }
-              }
-            },
-            include: {
-              contents: true
             }
-          })
-        )
-      );
-
-      return { course, modules: createdModules };
-    });
+          }
+        },
+        include: {
+          contents: true
+        }
+      });
+      createdModules.push(module);
+    }
 
     return NextResponse.json(
       { 
         success: true,
-        courseId: result.course.id,
-        modules: result.modules.map(m => ({
-          id: m.id,
-          title: m.title,
-          position: m.position
-        }))
+        courseId: course.id,
       },
       { status: 201 }
     );
