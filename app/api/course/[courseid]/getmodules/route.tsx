@@ -28,10 +28,7 @@ export async function GET(
     const course = await prisma.course.findUnique({
       where: { id: courseid },
       include: {
-        authors: {
-          where: { userId: session.user?.id },
-          select: { role: true }
-        }
+        authors: true
       }
     });
 

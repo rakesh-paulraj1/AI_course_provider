@@ -86,7 +86,7 @@ const ModulePage = () => {
     if (!module) return
     
     try {
-      const response = await fetch('/api/course/savemodulecontent', {
+      const response = await fetch('/api/course/savecontent', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
