@@ -27,6 +27,11 @@ export default function Home() {
             <div className="text-6xl lg:text-8xl animate-gradient to-65% bg-gradient-to-br bg-clip-text bg-right-bottom font-extrabold text-transparent from-white from-35% via-[#3178c6] to-[#3178c6] bg-[length:300%_300%]">
                Course GPT
                 </div>
+                <>
+                <div className="text-2xl lg:text-3xl mt-4 text-neutral-400 dark:text-white">
+                    Create your own course using AI
+                </div>
+                </>
                 <div>
                     <TextGenerateEffect words="Created for Kalvium" />
                 </div>

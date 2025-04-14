@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/utils/providers";
-
+import { ThemeProvider } from 'next-themes'
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -18,13 +18,15 @@ export const metadata: Metadata = {
   description: "Created by Rakesh.P",
 };
 
-export default function RootLayout({
+export default  async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+   
+    <html lang="en" suppressHydrationWarning>
+      
       <Providers>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
@@ -32,6 +34,7 @@ export default function RootLayout({
         {children}
       </body>
       </Providers>
+     
     </html>
   );
 }

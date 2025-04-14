@@ -1,16 +1,18 @@
 "use client"
 import Link from 'next/link';
-
+import { useTheme } from 'next-themes';
 import { Award, LogOut, Menu, X,} from 'lucide-react';
 import { signOut } from 'next-auth/react';
 import { useState } from 'react';
 import { useRouter } from "next/navigation";
+
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 
 export function Layout({ children }: LayoutProps) {
+  const { theme, setTheme } = useTheme()
 const router = useRouter();
   const handlesignout = async () => {
     await signOut({
@@ -56,6 +58,7 @@ const router = useRouter();
         {/* Right-aligned items */}
         <div className="flex items-center ml-auto">
         <div className="hidden md:block">
+        <button onClick={() => { setTheme('dark'); console.log('Theme set to Dark'); }}>Dark Mode</button>
           <button onClick={handlesignout}><LogOut className="h-5 w-5" /></button>
     
   </div>
