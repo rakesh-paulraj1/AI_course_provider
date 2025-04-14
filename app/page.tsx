@@ -3,18 +3,20 @@ import { SigninCard } from "@/components/Signincard";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useEffect } from 'react';
 export default function Home() {
   const session = useSession();
   const router = useRouter();
-  if(session?.data?.user.role === "admin"){
-    router.push("/admin");
-  }
-  else if(session?.data?.user.role === "author"){
-    router.push("/author/allcourses");
-  }
-  else if(session?.data?.user.role === "consumer"){
-    router.push("/consumer");
-  }
+  useEffect(() => {
+    if (session?.data?.user?.role === "admin") {
+      router.push("/admin");
+    } else if (session?.data?.user?.role === "author") {
+      router.push("/author/allcourses");
+    } else if (session?.data?.user?.role === "consumer") {
+      router.push("/consumer");
+    }
+  }, [session, router]); 
+
  
     
   return (

@@ -1,29 +1,24 @@
 // app/api/course/savecontent/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/utils/Prisma";
-export async function POST(req: NextRequest) {
+export async function PUT(req: NextRequest) {
   try {
-    const { moduleId, content } = await req.json();
-    
-    if (!moduleId || !content) {
+    const { contentId, content,title } = await req.json();
+    console.log("Received data:", { contentId, content,title });
+    if (!contentId || !content || !title) {
       return NextResponse.json(
         { error: "Module ID and content are required" },
         { status: 400 }
       );
     }
 
-    // Update the module content
     const updated = await prisma.moduleContent.updateMany({
-      where: { moduleId },
-      data: { content }
+      where: { id:contentId },
+      data: { content,
+        title
+       }
     });
 
-    
-
-    // return NextResponse.json({ 
-    //   success: true,
-    //   message: "Content updated successfully"
-    // });
     return NextResponse.json({ 
    
       message: "Content updated successfully"

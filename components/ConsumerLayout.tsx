@@ -14,9 +14,9 @@ export function Layoutconsumer({ children }: LayoutProps) {
 const router = useRouter();
   const handlesignout = async () => {
     await signOut({
-      redirect: false, // We'll handle the redirect manually
+      redirect: false, 
     });
-    router.push('/'); // Redirect to sign-in page after logout
+    router.push('/'); 
   };
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

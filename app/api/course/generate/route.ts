@@ -5,18 +5,18 @@ import { GoogleGenAI } from "@google/genai";
 
 export async function POST(req: NextRequest) {
   try {
-    // Initialize Google GenAI client
+
     const genAI = new GoogleGenAI({
-      apiKey: process.env.GEMINI_API_KEY // Make sure to add this to your .env
+      apiKey: process.env.GEMINI_API_KEY 
     });
 
-    // Verify authentication
+  
     const session = await getServerSession(NEXT_AUTH);
     if (!session) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Parse and validate request
+   
     const { description } = await req.json();
     
     if (!description) {
@@ -26,7 +26,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Generate course modules using Gemini
     
     const prompt = `
     You are an expert teacher's assistant. Generate exactly 5 comprehensive module titles for a course based on the description.
@@ -46,17 +45,14 @@ export async function POST(req: NextRequest) {
       contents: prompt,
     });
 
-    // Process the AI response
+    
     const aiResponse = result.text;
     console.log("AI Response:", aiResponse);
     if (!aiResponse) {
       throw new Error("No response from AI model");
     }
 
-    // Extract exactly 5 modules
-
-
-    // Validate we got exactly 5 modules
+   
     const modules = aiResponse.split("\n").filter((line) => line.trim()).slice(0, 5);
 
     return NextResponse.json({ 

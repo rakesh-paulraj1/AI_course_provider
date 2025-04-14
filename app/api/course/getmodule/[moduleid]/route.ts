@@ -4,26 +4,25 @@ import { NEXT_AUTH } from "@/utils/auth";
 import { getServerSession } from "next-auth/next";
 export async function GET(
   req: NextRequest,
-  { params }: { params: { moduleid: string } }
+  { params }: { params:Promise< { moduleid: string }> }
 ) {
   try {
      const session = await getServerSession(NEXT_AUTH);
         if (!session) {
           return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
-    const { moduleid } = params;
+    const { moduleid } =  await params;
 
-    // Get module with all contents (only title and content fields)
     const moduleContents = await prisma.module.findUnique({
       where: { 
         id: moduleid
       },
       select: {
-        title: true, // Include module title
-        description: true, // Include module description
+        title: true,
         contents: {
-         
           select: {
+            id: true,
+            title: true,
             content: true,
           }
         }
@@ -42,13 +41,11 @@ export async function GET(
       success: true,
       data: {
         moduleTitle: moduleContents.title,
-        moduleDescription: moduleContents.description,
+        // moduleDescription: moduleContents.description,
         contents: moduleContents.contents.map(content => ({
+          id: content.id,
           title: content.title,
           content: content.content,
-          position: content.position,
-          type: content.contentType,
-          createdAt: content.createdAt
         }))
       }
     });

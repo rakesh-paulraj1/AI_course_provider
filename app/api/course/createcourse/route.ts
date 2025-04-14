@@ -5,35 +5,31 @@ import prisma from "@/utils/Prisma";
 
 export async function POST(req: NextRequest) {
   try {
-    // Verify authentication
+    
     const session = await getServerSession(NEXT_AUTH);
     if (!session || !session.user?.id) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Parse request body
-    const { title, description, modules } = await req.json();
+   console.log("Session:", session.user);
+    const { title, modules } = await req.json();
     
-    // Validate required fields
-    if (!title || !description || !modules?.length) {
+    if (!title || !modules?.length) {
       return NextResponse.json(
         { error: "Title, description, and at least one module are required" },
         { status: 400 }
       );
     }
 
-    // 1. Create the course
     const course = await prisma.course.create({
       data: {
         title,
-        description,
         status: 'published',
         createdAt: new Date(),
         updatedAt: new Date(),
       }
     });
 
-    // 2. Create course author relationship
     await prisma.courseAuthor.create({
       data: {
         courseId: course.id,
@@ -43,30 +39,27 @@ export async function POST(req: NextRequest) {
       }
     });
 
-    // 3. Create modules with empty content
     const createdModules = [];
     for (const [index, moduleTitle] of modules.entries()) {
       await prisma.module.create({
         data: {
           courseId: course.id,
           title: moduleTitle,
-          description: "",
           position: index + 1,
-          isLocked: false,
           createdAt: new Date(),
           updatedAt: new Date(),
-          contents: {
-            create: {
-              title: "Untitled Content",
-              content: "",
-              contentType: "text",
-              position: 1,
-              creatorId: session.user.id,
-              aiGenerated: false,
-              createdAt: new Date(),
-              updatedAt: new Date(),
-            }
-          }
+        contents: {
+          create: Array.from({ length: 5 }, () => ({
+            title: "Untitled Content",
+            content: "",
+            createdAt: new Date(),
+            creator: {
+              connect: {
+                id: session.user.id,
+              },
+            },
+          }))
+        }
         },
         include: {
           contents: true
@@ -79,6 +72,7 @@ export async function POST(req: NextRequest) {
       { 
         success: true,
         courseId: course.id,
+        createdModules: createdModules,
       },
       { status: 201 }
     );

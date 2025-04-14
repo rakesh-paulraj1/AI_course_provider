@@ -5,7 +5,7 @@ import { NEXT_AUTH } from "@/utils/auth";
 
 export async function GET() {
   try {
-    // Get the session
+  
     const session = await getServerSession(NEXT_AUTH);
     if (!session) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

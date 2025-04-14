@@ -7,6 +7,7 @@ import { FaBookOpen } from 'react-icons/fa'
 import { cn } from '@/utils/utils'
 import { useState } from 'react'
 import Link from 'next/link'
+import { useParams } from 'next/navigation'
 import { useEffect } from 'react'
 const variants = {
   initial: {
@@ -17,8 +18,9 @@ const variants = {
   },
 }
 
-const Page = ({ params }: { params: { id: string } }) => {
-  const { id } = React.use(params)
+const Page = () => {
+ const params = useParams()
+  const id = params.id as string
   const [courseData, setCourseData] = useState<{
     title: React.ReactNode
     id: any
@@ -63,7 +65,7 @@ const Page = ({ params }: { params: { id: string } }) => {
   return (
     <Layout>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Course Title Header */}
+     
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
             {courseData.title}
@@ -73,9 +75,8 @@ const Page = ({ params }: { params: { id: string } }) => {
           </p>
         </div>
 
-        {/* Modules Grid */}
         {courseData.course && courseData.modules && courseData.modules.length > 0 ? (
-          <BentoGrid className="max-w-7xl mx-auto md:auto-rows-[20rem]">
+          <BentoGrid className="max-w-4xl  mx-auto md:auto-rows-[20rem]">
             {courseData.modules.map((module, i) => (
               <Link href={`/author/modules/${module.id}`} key={module.id}>
                 <BentoGridItem
@@ -91,7 +92,7 @@ const Page = ({ params }: { params: { id: string } }) => {
                         repeat: Infinity,
                         repeatType: "reverse",
                       }}
-                      className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] rounded-lg bg-dot-black/[0.2] flex-col space-y-2"
+                      className="flex flex-1 w-half} h-full min-h-[6rem] dark:bg-dot-white/[0.2] rounded-lg bg-dot-black/[0.2] flex-col space-y-2"
                       style={{
                         background:
                           "linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)",

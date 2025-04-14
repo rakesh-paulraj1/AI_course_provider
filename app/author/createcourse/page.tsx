@@ -19,6 +19,10 @@ const CreateCoursePage = () => {
       alert("Please enter a course description")
       return
     }
+    if (!title.trim()) {
+      alert("Please enter a course description")
+      return
+    }
 
     try {
       setIsGenerating(true)
@@ -90,7 +94,7 @@ const CreateCoursePage = () => {
       }
   
       const data = await response.json();
-      router.push(`/courses/${data.courseId}`);
+      router.push(`/author/courses/${data.courseId}`);
     } catch (error) {
       console.error('Error creating course:', error);
       alert('Failed to create course. Please try again.');

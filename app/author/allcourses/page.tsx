@@ -43,7 +43,6 @@ const Dashboard = () => {
     }
   }, [status, session, router]);
 
-  // Effect for fetching courses - only runs once when authenticated
   useEffect(() => {
     if (status === "authenticated") {
       getCourses();
@@ -109,7 +108,7 @@ const Dashboard = () => {
             </div>
         ))):(<div className="flex flex-col items-center p-4">
           <p className="text-gray-600 mb-4">No Courses available.</p>
-          <Link href="/dashboard/createsubject">
+          <Link href="/author/createcourse">
             <div className="px-6 py-2 bg-black text-white rounded-lg font-bold transform hover:-translate-y-1 transition duration-400">
               Create New Subject
             </div>

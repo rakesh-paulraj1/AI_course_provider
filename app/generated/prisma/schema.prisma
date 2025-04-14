@@ -31,7 +31,6 @@ model User {
 model Course {
   id            String         @id @default(uuid())
   title         String
-  description   String
   status        CourseStatus   @default(draft)
   coverImageUrl String?
   createdAt     DateTime       @default(now())
@@ -56,34 +55,27 @@ model CourseAuthor {
 }
 
 model Module {
-  id          String          @id @default(uuid())
-  course      Course          @relation(fields: [courseId], references: [id])
-  courseId    String
-  title       String
-  description String
-  position    Int
-  isLocked    Boolean         @default(false)
-  createdAt   DateTime        @default(now())
-  updatedAt   DateTime        @updatedAt
-  contents    ModuleContent[]
+  id        String          @id @default(uuid())
+  course    Course          @relation(fields: [courseId], references: [id])
+  courseId  String
+  title     String
+  position  Int
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  contents  ModuleContent[]
 
   @@map("modules")
 }
 
 model ModuleContent {
-  id          String      @id @default(uuid())
-  module      Module      @relation(fields: [moduleId], references: [id])
-  moduleId    String
-  title       String
-  content     String
-  contentType ContentType
-  position    Int
-  duration    Int?
-  creator     User        @relation(fields: [creatorId], references: [id])
-  creatorId   String
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-  aiGenerated Boolean     @default(false)
+  id        String   @id @default(uuid())
+  module    Module   @relation(fields: [moduleId], references: [id])
+  moduleId  String
+  title     String
+  content   String
+  creator   User     @relation(fields: [creatorId], references: [id])
+  creatorId String
+  createdAt DateTime @default(now())
 
   @@map("module_contents")
 }
@@ -103,12 +95,4 @@ enum CourseStatus {
 enum CourseAuthorRole {
   primary
   contributor
-}
-
-enum ContentType {
-  text
-  video
-  quiz
-  document
-  interactive
 }

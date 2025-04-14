@@ -130,7 +130,6 @@ exports.Prisma.UserScalarFieldEnum = {
 exports.Prisma.CourseScalarFieldEnum = {
   id: 'id',
   title: 'title',
-  description: 'description',
   status: 'status',
   coverImageUrl: 'coverImageUrl',
   createdAt: 'createdAt',
@@ -149,9 +148,7 @@ exports.Prisma.ModuleScalarFieldEnum = {
   id: 'id',
   courseId: 'courseId',
   title: 'title',
-  description: 'description',
   position: 'position',
-  isLocked: 'isLocked',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -161,13 +158,8 @@ exports.Prisma.ModuleContentScalarFieldEnum = {
   moduleId: 'moduleId',
   title: 'title',
   content: 'content',
-  contentType: 'contentType',
-  position: 'position',
-  duration: 'duration',
   creatorId: 'creatorId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  aiGenerated: 'aiGenerated'
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -199,14 +191,6 @@ exports.CourseStatus = exports.$Enums.CourseStatus = {
 exports.CourseAuthorRole = exports.$Enums.CourseAuthorRole = {
   primary: 'primary',
   contributor: 'contributor'
-};
-
-exports.ContentType = exports.$Enums.ContentType = {
-  text: 'text',
-  video: 'video',
-  quiz: 'quiz',
-  document: 'document',
-  interactive: 'interactive'
 };
 
 exports.Prisma.ModelName = {
