@@ -27,13 +27,15 @@ export default  async function RootLayout({
    
     <html lang="en" suppressHydrationWarning >
       
-      <Providers>
+      
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Providers>
         {children}
+        </Providers>
       </body>
-      </Providers>
+      
      
     </html>
   );

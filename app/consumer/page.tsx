@@ -1,18 +1,40 @@
-import { Layout } from '@/components/Layout'
+"use client"
 import React from 'react'
+import { useReducer } from 'react'
+const initialstate={count:0};
+interface State {
+  count: number;
+}
 
-const Dashboard = () => {
+interface Action {
+  type: 'increment' | 'decrement';
+}
+
+const reducer = (state: State, action: Action): State => {
+  switch (action.type) {
+    case 'increment':
+      return { count: state.count + 1 };
+    case 'decrement':
+      return { count: state.count - 1 };
+    default:
+      return state;
+  }
+};
+const Page1 = () => {
+    const [state,dispatch]=useReducer(reducer,initialstate);
+    const increaseCount=()=>{
+        dispatch({type:'increment'});
+    };
+    const decreaseCount=()=>{
+        dispatch({type:'decrement'});
+    };
   return (
-   <Layout>
-    <div className="h-screen w-full flex justify-center items-center">
-      <div className="h-[390px] w-[360px] bg-neutral-950 rounded-lg shadow-slate-800 shadow-[0_0_10px_2px_rgb(148,163,184)] flex flex-col items-center p-4">
-        <div className="font-bold text-4xl p-4 text-neutral-400">
-          Dashboard
-        </div>
-      </div>
+    <div>
+        <div className="">{state.count}</div>;
+<button onClick={increaseCount}>Increase</button>
+<button onClick={decreaseCount}>Decrease</button>
     </div>
-   </Layout>
   )
 }
 
-export default Dashboard
+export default Page1
