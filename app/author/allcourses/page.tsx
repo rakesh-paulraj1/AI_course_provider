@@ -1,4 +1,5 @@
 import React from 'react'
+export const dynamic = 'force-dynamic'
 import Link from 'next/link'
 import { Layout } from '@/components/Layout'
 import { NEXT_AUTH } from '@/utils/auth'
